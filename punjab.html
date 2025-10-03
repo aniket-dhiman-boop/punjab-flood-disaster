@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aqua Guardians</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0; padding: 0;
+      color: #e0e0e0;
+      background: #0a192f url('https://i.ibb.co/JR0519gW/punjabflood.jpg') no-repeat center center fixed;
+      background-size: cover;
+    }
+    a { text-decoration: none; }
+
+    iframe {
+      width: 90%; max-width: 800px; height: 450px;
+      display: block; margin: 20px auto;
+      border-radius: 16px; 
+      box-shadow: 0 10px 25px rgba(0,0,0,0.6);
+      border: 2px solid #0ea5e9;
+    }
+
+    .headline {
+      text-align: center; padding: 60px 20px 40px;
+      background: rgba(10,25,47,0.75); backdrop-filter: blur(6px);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.6);
+    }
+    .headline h1 {
+      font-size: 3rem; margin: 0;
+      background: linear-gradient(90deg,#64ffda,#0ea5e9);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      text-transform: uppercase; letter-spacing: 4px;
+    }
+    .headline p {
+      font-size: 1.2rem; margin-top: 12px; color: #cdd6f4;
+    }
+    .cta-btn {
+      display: inline-block; margin-top: 20px;
+      padding: 14px 28px; font-size: 1rem; font-weight: bold;
+      border-radius: 8px;
+      background: linear-gradient(90deg,#0ea5e9,#3b82f6); color: #fff;
+      transition: all 0.3s ease;
+      cursor:pointer;
+    }
+    .cta-btn:hover { transform: scale(1.05); }
+
+    .stats {
+      display: flex; justify-content: center; gap: 30px; flex-wrap: wrap;
+      background: rgba(17,34,64,0.85); padding: 30px 15px; text-align: center;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+    }
+    .stat-box {
+      flex: 1; min-width: 200px; padding: 20px;
+      border-radius: 12px;
+      background: rgba(14,165,233,0.15);
+      box-shadow: 0 6px 18px rgba(0,0,0,0.5);
+      transition: transform 0.3s ease;
+    }
+    .stat-box:hover { transform: translateY(-5px) scale(1.05); }
+    .stat-box h2 { font-size: 2rem; color: #64ffda; margin: 0; }
+    .stat-box p { margin: 8px 0 0; font-size: 1rem; }
+
+    /* Tabs */
+    .tab {
+      display: flex; justify-content: center; background: rgba(17,34,64,0.85);
+      gap: 8px; padding: 12px 0; position: sticky; top: 0; z-index: 10;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.5);
+    }
+    .tab button {
+      background-color: rgba(30,58,138,0.85); border: none; outline: none;
+      cursor: pointer; padding: 14px 28px; color: #fff; font-size: 16px;
+      border-radius: 8px; transition: all 0.3s ease;
+    }
+    .tab button.active { background-color: #0ea5e9; font-weight: bold; }
+    .tab button:hover { transform: translateY(-3px) scale(1.03); }
+    .tabcontent {
+      display: none; max-width: 950px; margin: 40px auto;
+      padding: 30px; border-radius: 16px;
+      background: rgba(17,34,64,0.82); backdrop-filter: blur(8px);
+      color: #e0f2fe; box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+    }
+    .tabcontent.active { display: block; }
+
+    /* Help Form */
+    .request-help {
+      border: 3px solid #0ea5e9; border-radius: 12px;
+      background: linear-gradient(145deg, rgba(14,165,233,0.15), rgba(14,165,233,0.05));
+      box-shadow: 0 10px 30px rgba(14,165,233,0.4);
+      padding: 25px; margin-bottom: 25px;
+      transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease;
+    }
+    .request-help:hover { transform: scale(1.03); box-shadow: 0 15px 35px rgba(14,165,233,0.6); border-color: #3b82f6; }
+    .request-help h3 { color:#0ea5e9; font-size:1.6rem; }
+    .request-help input, .request-help select, .request-help textarea {
+      border: 2px solid transparent; padding:10px; margin:8px 0; border-radius:6px; width:90%;
+    }
+    .request-help input:focus, .request-help select:focus, .request-help textarea:focus {
+      border-color:#0ea5e9; outline:none;
+    }
+    .request-help button {
+      margin-top:10px; padding:12px 24px; border:none; border-radius:6px;
+      background: linear-gradient(90deg,#0ea5e9,#3b82f6); color:white; cursor:pointer;
+    }
+    .request-help button:hover { transform:scale(1.05); }
+
+    /* Videos */
+    .video-container {
+      margin: 20px 0;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 12px 28px rgba(0,0,0,0.6);
+      border: 2px solid #0ea5e9;
+      background: rgba(0,0,0,0.2);
+      padding:10px;
+    }
+    .video-header {
+      text-align:center; font-size:1.5rem; font-weight:bold; color:#64ffda; margin-bottom:15px;
+    }
+
+    /* Cards for Data & Safety */
+    .info-cards {
+      display: flex; flex-wrap: wrap; gap: 20px; justify-content: center;
+      margin-top: 20px;
+    }
+    .info-card {
+      background: rgba(14,165,233,0.15); padding: 20px;
+      border-radius: 12px; min-width: 250px; max-width: 300px;
+      box-shadow: 0 8px 22px rgba(0,0,0,0.5);
+      transition: transform 0.3s ease;
+    }
+    .info-card:hover { transform: translateY(-5px) scale(1.05); }
+    .info-card h4 { font-size: 1.3rem; color: #0ea5e9; margin-bottom:10px; }
+    .info-card p { font-size: 1rem; color:#cde1f9; }
+
+    footer { margin-top:40px; text-align:center; padding:20px; background: rgba(17,34,64,0.9); font-size:0.9rem; color:#a5b4fc; }
+
+    #savedData, #helpResponse { margin-top:15px; font-weight:bold; color:#64ffda; white-space: pre-line; }
+  </style>
+</head>
+<body>
+
+  <div class="headline">
+    <h1>🌊 Aqua Guardians</h1>
+    <p>Working together to make Punjab safe, resilient, and ready for any flood. We connect communities, track flood impact, and support relief efforts through collaboration with organizations like Khalsa Aid.</p>
+    <a href="https://www.khalasaid.org/donate" id="donateBtn" class="cta-btn" target="_blank">Donate Now 💖</a>
+  </div>
+
+  <div class="stats">
+    <div class="stat-box"><h2>1,900+</h2><p>Villages Affected</p></div>
+    <div class="stat-box"><h2>55+</h2><p>Lives Lost (India)</p></div>
+    <div class="stat-box"><h2>384,000+</h2><p>People Displaced</p></div>
+    <div class="stat-box"><h2>371,475 acres</h2><p>Farmland Submerged</p></div>
+  </div>
+
+  <!-- Tabs -->
+  <div class="tab">
+    <button class="tablinks active" onclick="openTab(event,'Home')">Home</button>
+    <button class="tablinks" onclick="openTab(event,'Data')">Data & Analysis</button>
+    <button class="tablinks" onclick="openTab(event,'Donation')">Donation</button>
+    <button class="tablinks" onclick="openTab(event,'Safety')">Safety</button>
+    <button class="tablinks" onclick="openTab(event,'Videos')">Videos</button>
+  </div>
+
+  <!-- Home Tab -->
+  <div id="Home" class="tabcontent active">
+    <h3>🏠 Welcome to Aqua Guardians</h3>
+    <p>Aqua Guardians is dedicated to providing timely flood awareness and relief support for Punjab communities. By tracking flood-affected regions and collaborating with aid organizations like Khalsa Aid, we aim to protect lives and livelihoods.</p>
+    <p>On this platform, you can explore flood data, request help, donate to support relief operations, and watch educational videos on flood causes, impacts, and safety measures. Together, we can make our communities resilient against natural disasters.</p>
+
+    <div class="request-help">
+      <h3>🚨 Request Help</h3>
+      <form id="helpForm">
+        <input type="text" id="helpName" placeholder="Enter your name" required><br>
+        <input type="text" id="helpVillage" placeholder="Enter your village" required><br>
+        <select id="helpType" required>
+          <option value="">--Choose Help Type--</option>
+          <option value="Shelter">Shelter</option>
+          <option value="Food">Food</option>
+          <option value="Medical">Medical</option>
+          <option value="Other">Other</option>
+        </select><br>
+        <textarea id="helpDetails" placeholder="Describe your situation..." rows="3"></textarea><br>
+        <button type="submit">Submit Request</button>
+      </form>
+      <p id="helpResponse"></p>
+    </div>
+  </div>
+
+  <!-- Data Tab -->
+  <div id="Data" class="tabcontent">
+    <h3>📊 Flood Data & Analysis</h3>
+    <p>Punjab has been severely affected by recurring floods, impacting thousands of villages, displacing residents, and destroying farmland. Understanding the data allows authorities and citizens to plan effective mitigation strategies. Here’s a snapshot of the flood impact and patterns:</p>
+    <div class="info-cards">
+      <div class="info-card">
+        <h4>Water Levels & Rivers</h4>
+        <p>Major rivers like Sutlej and Beas often overflow due to heavy monsoon rains. Water levels have risen over 3 meters in certain districts, inundating nearby villages and towns.</p>
+      </div>
+      <div class="info-card">
+        <h4>Rainfall Statistics</h4>
+        <p>During peak monsoon, rainfall in Punjab exceeded 250mm within 24 hours in multiple locations. This led to flash floods and significant drainage issues in urban and rural areas.</p>
+      </div>
+      <div class="info-card">
+        <h4>Economic Loss</h4>
+        <p>Damage to crops, houses, and infrastructure is estimated in billions of INR. Agriculture is the most affected sector, with paddy and wheat crops submerged for weeks.</p>
+      </div>
+      <div class="info-card">
+        <h4>Displacement & Relief</h4>
+        <p>Over 384,000 people were temporarily displaced. Relief operations include providing shelter, clean water, food, and medical aid to affected populations.</p>
+      </div>
+    </div>
+    <p style="margin-top:25px;">Analyzing these patterns helps implement early warning systems, effective drainage improvements, and timely evacuation plans to minimize loss of life and property.</p>
+  </div>
+
+  <!-- Donation Tab -->
+  <div id="Donation" class="tabcontent">
+    <h3>💖 Support & Donate</h3>
+    <p>Flood-affected communities need your support! Contributions help provide immediate shelter, food, clean water, and medical care. Partnering with <strong>Khalsa Aid</strong>, donations go directly to relief operations.</p>
+    <button class="cta-btn" onclick="window.open('https://www.khalasaid.org/donate','_blank');">Donate Now 💵</button>
+  </div>
+
+  <!-- Safety Tab -->
+  <div id="Safety" class="tabcontent">
+    <h3>🛡️ Flood Safety Tips</h3>
+    <p>Floods pose serious risks to life and property. Following preventive measures can help you and your family stay safe during flood events:</p>
+    <div class="info-cards">
+      <div class="info-card">
+        <h4>Before a Flood</h4>
+        <p>Keep emergency kits ready with water, food, medicines, flashlights, and important documents. Elevate valuables and electronics to higher floors. Monitor weather updates regularly.</p>
+      </div>
+      <div class="info-card">
+        <h4>During a Flood</h4>
+        <p>Avoid walking or driving through floodwater. Seek higher ground immediately. Stay informed through radio, TV, or official apps. Do not touch electrical equipment if wet.</p>
+      </div>
+      <div class="info-card">
+        <h4>Evacuation</h4>
+        <p>Follow evacuation orders promptly. Know the nearest shelter locations. Assist children, elderly, and neighbors if necessary.</p>
+      </div>
+      <div class="info-card">
+        <h4>After a Flood</h4>
+        <p>Return home only when authorities declare it safe. Avoid floodwater as it may be contaminated. Inspect your home for damages before entering and maintain hygiene to prevent diseases.</p>
+      </div>
+    </div>
+    <p style="margin-top:25px;">Awareness and preparedness are key to reducing the impact of floods. Stay safe, stay informed, and support your community in times of need.</p>
+  </div>
+
+  <!-- Videos Tab -->
+  <div id="Videos" class="tabcontent">
+    <h3>📹 Videos</h3>
+    <p style="text-align:center; font-size:1.5rem; font-weight:bold; color:#64ffda; margin-bottom:25px;">
+      🌊 Flood's Cause and Damages
+    </p>
+    <div class="video-container">
+      <div class="video-header">Flood Impact Overview</div>
+      <iframe src="https://go.screenpal.com/player/cT6eFLnDd4W?ff=1&title=0" allowfullscreen></iframe>
+    </div>
+    <div class="video-container">
+      <div class="video-header">Helping Hands in High Waters</div>
+      <div class="sp-embed-player" data-id="cT6eYEnDdsf">
+        <script src="https://go.screenpal.com/player/appearance/cT6eYEnDdsf"></script>
+        <iframe src="https://go.screenpal.com/player/cT6eYEnDdsf?width=100%&height=100%&ff=1&title=0" allowfullscreen></iframe>
+      </div>
+    </div>
+  </div>
+
+  <footer>© 2025 Aqua Guardians. All rights reserved.</footer>
+
+  <script>
+    function openTab(evt, tabName){
+      document.querySelectorAll(".tabcontent").forEach(c => c.classList.remove("active"));
+      document.querySelectorAll(".tablinks").forEach(b => b.classList.remove("active"));
+      document.getElementById(tabName).classList.add("active");
+      evt.currentTarget.classList.add("active");
+    }
+
+    const helpForm = document.getElementById("helpForm");
+    const helpResponse = document.getElementById("helpResponse");
+
+    helpForm.addEventListener("submit",(e)=>{
+      e.preventDefault();
+      const name = document.getElementById("helpName").value;
+      const village = document.getElementById("helpVillage").value;
+      const type = document.getElementById("helpType").value;
+      localStorage.setItem("helpName",name);
+      localStorage.setItem("helpVillage",village);
+      localStorage.setItem("helpType",type);
+      helpResponse.innerText=`✅ Request Submitted: ${name} from ${village} requesting ${type}`;
+      helpForm.reset();
+    })
+  </script>
+
+</body>
+</html>
