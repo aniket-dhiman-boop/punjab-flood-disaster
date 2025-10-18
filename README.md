@@ -19,7 +19,7 @@ The website records the impact, analysis, contributions, and safety precautions 
 ---------------------------------------------------
 📂 Project Structure
 
-index.html      # Main project file
+punjab.html      # Main project file
 punjabflood.jpg # Local image for carousel (keep in same folder)
 README.txt      # Project description
 
